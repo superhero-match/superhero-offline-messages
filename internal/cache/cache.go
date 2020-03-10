@@ -18,7 +18,7 @@ import (
 
 	"github.com/go-redis/redis"
 
-	"github.com/superhero-offline-messages/internal/config"
+	"github.com/superhero-match/superhero-offline-messages/internal/config"
 )
 
 // Cache is the Redis client.

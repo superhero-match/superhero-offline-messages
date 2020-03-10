@@ -15,7 +15,7 @@ package cache
 
 import (
 	"github.com/go-redis/redis"
-	"github.com/superhero-offline-messages/internal/cache/model"
+	"github.com/superhero-match/superhero-offline-messages/internal/cache/model"
 )
 
 // GetMessages fetches suggestions from cache.

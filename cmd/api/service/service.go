@@ -14,8 +14,8 @@
 package service
 
 import (
-	"github.com/superhero-offline-messages/internal/cache"
-	"github.com/superhero-offline-messages/internal/config"
+	"github.com/superhero-match/superhero-offline-messages/internal/cache"
+	"github.com/superhero-match/superhero-offline-messages/internal/config"
 	"go.uber.org/zap"
 )
 
