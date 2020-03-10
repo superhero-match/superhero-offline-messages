@@ -14,8 +14,8 @@
 package main
 
 import (
-	"github.com/superhero-offline-messages/cmd/api/controller"
-	"github.com/superhero-offline-messages/internal/config"
+	"github.com/superhero-match/superhero-offline-messages/cmd/api/controller"
+	"github.com/superhero-match/superhero-offline-messages/internal/config"
 )
 
 func main() {

@@ -20,7 +20,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
-	ctrl "github.com/superhero-offline-messages/cmd/api/model"
+	ctrl "github.com/superhero-match/superhero-offline-messages/cmd/api/model"
 )
 
 // GetOfflineMessages fetches offline messages.

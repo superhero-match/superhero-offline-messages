@@ -16,8 +16,8 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/superhero-offline-messages/cmd/api/service"
-	"github.com/superhero-offline-messages/internal/config"
+	"github.com/superhero-match/superhero-offline-messages/cmd/api/service"
+	"github.com/superhero-match/superhero-offline-messages/internal/config"
 )
 
 // Controller holds the Controller data.

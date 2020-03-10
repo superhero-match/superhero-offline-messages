@@ -14,8 +14,8 @@
 package mapper
 
 import (
-	"github.com/superhero-offline-messages/cmd/api/model"
-	cm "github.com/superhero-offline-messages/internal/cache/model"
+	"github.com/superhero-match/superhero-offline-messages/cmd/api/model"
+	cm "github.com/superhero-match/superhero-offline-messages/internal/cache/model"
 )
 
 // MapFromCacheModelToAPI maps Cache Message model to API Message model.

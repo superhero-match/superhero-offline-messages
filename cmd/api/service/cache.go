@@ -16,8 +16,8 @@ package service
 import (
 	"fmt"
 
-	"github.com/superhero-offline-messages/cmd/api/model"
-	"github.com/superhero-offline-messages/cmd/api/service/mapper"
+	"github.com/superhero-match/superhero-offline-messages/cmd/api/model"
+	"github.com/superhero-match/superhero-offline-messages/cmd/api/service/mapper"
 )
 
 // GetCachedSuggestion fetches suggestion from cache and maps it into result.
