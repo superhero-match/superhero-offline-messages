@@ -11,35 +11,19 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package cache
+package health
 
 import (
-	"github.com/go-redis/redis"
-	"github.com/superhero-match/superhero-offline-messages/internal/cache/model"
+	"net/http"
 )
 
-// GetMessages fetches suggestions from cache.
-func (c *Cache) GetMessages(key string) ([]*model.Message, error) {
-	res, err := c.Redis.SMembers(key).Result()
-	if err != nil && err != redis.Nil {
-		return nil, err
+// ShutdownHealthServer sends shutdown signal to health server. This shutdown signal is sent only when API server
+// is panicking and is about to be shutdown to notify loadbalancer that API is un-healthy.
+func (c *Client) ShutdownHealthServer () error {
+	_, err := http.Post(c.HealthServerURL, c.ContentType, nil)
+	if err != nil {
+		return err
 	}
 
-	if len(res) == 0 {
-		return nil, nil
-	}
-
-	messages := make([]*model.Message, 0)
-
-	for _, msg := range res {
-		var message model.Message
-
-		if err := message.UnmarshalBinary([]byte(msg)); err != nil {
-			return nil, err
-		}
-
-		messages = append(messages, &message)
-	}
-
-	return messages, nil
+	return nil
 }

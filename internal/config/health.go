@@ -11,35 +11,11 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package cache
+package config
 
-import (
-	"github.com/go-redis/redis"
-	"github.com/superhero-match/superhero-offline-messages/internal/cache/model"
-)
-
-// GetMessages fetches suggestions from cache.
-func (c *Cache) GetMessages(key string) ([]*model.Message, error) {
-	res, err := c.Redis.SMembers(key).Result()
-	if err != nil && err != redis.Nil {
-		return nil, err
-	}
-
-	if len(res) == 0 {
-		return nil, nil
-	}
-
-	messages := make([]*model.Message, 0)
-
-	for _, msg := range res {
-		var message model.Message
-
-		if err := message.UnmarshalBinary([]byte(msg)); err != nil {
-			return nil, err
-		}
-
-		messages = append(messages, &message)
-	}
-
-	return messages, nil
+// Health holds configuration for health server.
+type Health struct {
+	Port             string `env:"HEALTH_SERVER_PORT" default:":8200"`
+	ShutdownEndpoint string `env:"HEALTH_SERVER_SHUTDOWN_ENDPOINT" default:"/api/v1/superhero_offline_messages_health/shutdown"`
+	ContentType      string `env:"HEALTH_SERVER_CONTENT_TYPE" default:"application/json"`
 }

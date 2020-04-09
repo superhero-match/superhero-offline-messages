@@ -11,35 +11,30 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package cache
+package controller
 
 import (
-	"github.com/go-redis/redis"
-	"github.com/superhero-match/superhero-offline-messages/internal/cache/model"
+	"github.com/gin-gonic/gin"
 )
 
-// GetMessages fetches suggestions from cache.
-func (c *Cache) GetMessages(key string) ([]*model.Message, error) {
-	res, err := c.Redis.SMembers(key).Result()
-	if err != nil && err != redis.Nil {
-		return nil, err
-	}
+// Controller holds the Controller data.
+type Controller struct {
+}
 
-	if len(res) == 0 {
-		return nil, nil
-	}
+// NewController returns new controller.
+func NewController() (*Controller, error) {
+	return &Controller{}, nil
+}
 
-	messages := make([]*model.Message, 0)
+// RegisterRoutes registers all the superhero_suggestions API routes.
+func (ctl *Controller) RegisterRoutes() *gin.Engine {
+	router := gin.Default()
 
-	for _, msg := range res {
-		var message model.Message
+	sr := router.Group("/api/v1/superhero_offline_messages_health")
 
-		if err := message.UnmarshalBinary([]byte(msg)); err != nil {
-			return nil, err
-		}
+	// Routes.
+	sr.POST("/health", ctl.Health)
+	sr.POST("/shutdown", ctl.Shutdown)
 
-		messages = append(messages, &message)
-	}
-
-	return messages, nil
+	return router
 }

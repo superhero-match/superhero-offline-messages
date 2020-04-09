@@ -19,8 +19,9 @@ import (
 
 // Config holds the configuration.
 type Config struct {
-	App      *App
-	Cache    *Cache
+	App    *App
+	Cache  *Cache
+	Health *Health
 }
 
 // NewConfig returns the configuration.

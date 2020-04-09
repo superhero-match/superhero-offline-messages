@@ -11,35 +11,17 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package cache
+package controller
 
 import (
-	"github.com/go-redis/redis"
-	"github.com/superhero-match/superhero-offline-messages/internal/cache/model"
+	"github.com/gin-gonic/gin"
+	"net/http"
+	"os"
 )
 
-// GetMessages fetches suggestions from cache.
-func (c *Cache) GetMessages(key string) ([]*model.Message, error) {
-	res, err := c.Redis.SMembers(key).Result()
-	if err != nil && err != redis.Nil {
-		return nil, err
-	}
-
-	if len(res) == 0 {
-		return nil, nil
-	}
-
-	messages := make([]*model.Message, 0)
-
-	for _, msg := range res {
-		var message model.Message
-
-		if err := message.UnmarshalBinary([]byte(msg)); err != nil {
-			return nil, err
-		}
-
-		messages = append(messages, &message)
-	}
-
-	return messages, nil
+// Shutdown is called and panics when API server panics so that Health controller would not be responding and
+// loadbalancer would mark API server un-healthy and spin-up a new instance of API server.
+func (ctl *Controller) Shutdown(c *gin.Context) {
+	c.Status(http.StatusOK)
+	os.Exit(2)
 }

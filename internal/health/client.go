@@ -11,42 +11,38 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package main
+package health
 
 import (
-	"github.com/superhero-match/superhero-offline-messages/cmd/api/controller"
+	"fmt"
 	"github.com/superhero-match/superhero-offline-messages/internal/config"
-	"github.com/superhero-match/superhero-offline-messages/internal/health"
+	"log"
+	"net"
 )
 
-func main() {
-	cfg, err := config.NewConfig()
-	if err != nil {
-		panic(err)
-	}
-
-	client := health.NewClient(cfg)
-
-	ctrl, err := controller.NewController(cfg)
-	if err != nil {
-		_ = client.ShutdownHealthServer()
-
-		panic(err)
-	}
-
-	r := ctrl.RegisterRoutes()
-
-	err = r.RunTLS(
-		cfg.App.Port,
-		cfg.App.CertFile,
-		cfg.App.KeyFile,
-	)
-	if err != nil {
-		_ = client.ShutdownHealthServer()
-
-		panic(err)
-	}
-
-	_ = client.ShutdownHealthServer()
+// Client holds health client related data.
+type Client struct {
+	HealthServerURL string
+	ContentType     string
 }
 
+// NewClient return new health client.
+func NewClient(cfg *config.Config) *Client {
+	return &Client{
+		HealthServerURL: fmt.Sprintf("http://%s%s%s", getIPAddress(), cfg.Health.Port, cfg.Health.ShutdownEndpoint),
+		ContentType:     cfg.Health.ContentType,
+	}
+}
+
+// Get preferred outbound ip of this machine.
+func getIPAddress() string {
+	conn, err := net.Dial("udp", "8.8.8.8:80")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer conn.Close()
+
+	localAddr := conn.LocalAddr().(*net.UDPAddr)
+
+	return localAddr.IP.String()
+}

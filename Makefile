@@ -1,11 +1,5 @@
 prepare:
-	go get -u github.com/golang/dep/cmd/dep
-	go get -u github.com/gin-gonic/gin
-	go get -u golang.org/x/sys/unix
-	go get -u github.com/jinzhu/configor
-	go get -u go.uber.org/zap
-	go get -u github.com/segmentio/kafka-go
-	go get -u golang.org/x/net/context
+	go mod download
 
 run:
 	go build -o bin/main cmd/api/main.go
@@ -15,14 +9,11 @@ build:
 	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o bin/main cmd/api/main.go
 	chmod +x bin/main
 
-deps:
-	dep ensure -v
-
 dkb:
 	docker build -t superhero-offline-messages .
 
 dkr:
-	docker run --rm -p "5100:5100" superhero-offline-messages
+	docker run --rm -p "5100:5100" -p "8200:8200" superhero-offline-messages
 
 launch: dkb dkr
 

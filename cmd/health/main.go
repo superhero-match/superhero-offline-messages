@@ -11,35 +11,28 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package cache
+package main
 
 import (
-	"github.com/go-redis/redis"
-	"github.com/superhero-match/superhero-offline-messages/internal/cache/model"
+	"github.com/superhero-match/superhero-offline-messages/cmd/health/controller"
+	"github.com/superhero-match/superhero-offline-messages/internal/config"
 )
 
-// GetMessages fetches suggestions from cache.
-func (c *Cache) GetMessages(key string) ([]*model.Message, error) {
-	res, err := c.Redis.SMembers(key).Result()
-	if err != nil && err != redis.Nil {
-		return nil, err
+func main() {
+	cfg, err := config.NewConfig()
+	if err != nil {
+		panic(err)
 	}
 
-	if len(res) == 0 {
-		return nil, nil
+	ctrl, err := controller.NewController()
+	if err != nil {
+		panic(err)
 	}
 
-	messages := make([]*model.Message, 0)
+	r := ctrl.RegisterRoutes()
 
-	for _, msg := range res {
-		var message model.Message
-
-		if err := message.UnmarshalBinary([]byte(msg)); err != nil {
-			return nil, err
-		}
-
-		messages = append(messages, &message)
+	err = r.Run(cfg.Health.Port)
+	if err != nil {
+		panic(err)
 	}
-
-	return messages, nil
 }
