@@ -4,11 +4,6 @@
     <list default="true" id="de8ef433-9568-47eb-9589-f567f3a83570" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/api/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/api/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/cache/message.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/cache/message.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/config/config.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +49,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
-  <component name="RunManager" selected="Go Build.go build github.com/superhero-match/superhero-offline-messages/cmd/health">
+  <component name="RunManager" selected="Go Build.go build github.com/superhero-match/superhero-offline-messages/cmd/api">
     <configuration name="go build github.com/superhero-match/superhero-offline-messages/cmd/api" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="superhero-offline-messages" />
       <working_directory value="$PROJECT_DIR$" />
@@ -75,8 +70,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build github.com/superhero-match/superhero-offline-messages/cmd/health" />
         <item itemvalue="Go Build.go build github.com/superhero-match/superhero-offline-messages/cmd/api" />
+        <item itemvalue="Go Build.go build github.com/superhero-match/superhero-offline-messages/cmd/health" />
       </list>
     </recent_temporary>
   </component>
@@ -100,21 +95,21 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1583857543693" />
-    <state width="1323" height="298" key="GridCell.Tab.0.bottom" timestamp="1586426218585">
+    <state width="1323" height="298" key="GridCell.Tab.0.bottom" timestamp="1587554653020">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="298" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1586426218585" />
-    <state width="1323" height="298" key="GridCell.Tab.0.center" timestamp="1586426218584">
+    <state width="1323" height="298" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1587554653020" />
+    <state width="1323" height="298" key="GridCell.Tab.0.center" timestamp="1587554653020">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="298" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1586426218584" />
-    <state width="1323" height="298" key="GridCell.Tab.0.left" timestamp="1586426218584">
+    <state width="1323" height="298" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1587554653020" />
+    <state width="1323" height="298" key="GridCell.Tab.0.left" timestamp="1587554653019">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="298" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1586426218584" />
-    <state width="1323" height="298" key="GridCell.Tab.0.right" timestamp="1586426218584">
+    <state width="1323" height="298" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1587554653019" />
+    <state width="1323" height="298" key="GridCell.Tab.0.right" timestamp="1587554653020">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="298" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1586426218584" />
+    <state width="1323" height="298" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1587554653020" />
   </component>
 </project>
