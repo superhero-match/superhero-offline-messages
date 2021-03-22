@@ -61,7 +61,7 @@ func checkGetError(err error, c *gin.Context) bool {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"status": http.StatusInternalServerError,
-			"match":  nil,
+			"messages":  nil,
 		})
 
 		return true
