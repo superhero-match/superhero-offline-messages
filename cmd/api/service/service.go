@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2019 - 2021 MWSOFT
+  Copyright (C) 2019 - 2022 MWSOFT
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -14,35 +14,29 @@
 package service
 
 import (
+	"github.com/superhero-match/superhero-offline-messages/cmd/api/model"
 	"github.com/superhero-match/superhero-offline-messages/internal/cache"
 	"github.com/superhero-match/superhero-offline-messages/internal/config"
-	"go.uber.org/zap"
 )
 
-// Service holds all the different services that are used when handling request.
-type Service struct {
-	Cache      *cache.Cache
-	Logger     *zap.Logger
-	TimeFormat string
+// Service interface defines service methods.
+type Service interface {
+	GetMessages(key string) ([]model.Message, error)
+}
+
+// service holds all the different services that are used when handling request.
+type service struct {
+	Cache cache.Cache
 }
 
 // NewService creates value of type Service.
-func NewService(cfg *config.Config) (*Service, error) {
-	logger, err := zap.NewProduction()
-	if err != nil {
-		return nil, err
-	}
-
+func NewService(cfg *config.Config) (Service, error) {
 	ch, err := cache.NewCache(cfg)
 	if err != nil {
 		return nil, err
 	}
 
-	defer logger.Sync()
-
-	return &Service{
-		Cache:      ch,
-		Logger:     logger,
-		TimeFormat: cfg.App.TimeFormat,
+	return &service{
+		Cache: ch,
 	}, nil
 }

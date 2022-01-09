@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2019 - 2021 MWSOFT
+  Copyright (C) 2019 - 2022 MWSOFT
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -14,6 +14,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -29,21 +30,21 @@ func (ctl *Controller) GetOfflineMessages(c *gin.Context) {
 
 	err := c.BindJSON(&req)
 	if checkGetError(err, c) {
-		ctl.Service.Logger.Error(
+		ctl.Logger.Error(
 			"failed to bind JSON to value of type Request",
 			zap.String("err", err.Error()),
-			zap.String("time", time.Now().UTC().Format(ctl.Service.TimeFormat)),
+			zap.String("time", time.Now().UTC().Format(ctl.TimeFormat)),
 		)
 
 		return
 	}
 
-	result, err := ctl.Service.GetMessages(req.SuperheroID)
+	result, err := ctl.Service.GetMessages(fmt.Sprintf(ctl.MessagesKeyFormat, req.SuperheroID))
 	if checkGetError(err, c) {
-		ctl.Service.Logger.Error(
+		ctl.Logger.Error(
 			"failed while executing service.GetMatch()",
 			zap.String("err", err.Error()),
-			zap.String("time", time.Now().UTC().Format(ctl.Service.TimeFormat)),
+			zap.String("time", time.Now().UTC().Format(ctl.TimeFormat)),
 		)
 
 		return
@@ -60,8 +61,8 @@ func (ctl *Controller) GetOfflineMessages(c *gin.Context) {
 func checkGetError(err error, c *gin.Context) bool {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
-			"status": http.StatusInternalServerError,
-			"messages":  nil,
+			"status":   http.StatusInternalServerError,
+			"messages": nil,
 		})
 
 		return true

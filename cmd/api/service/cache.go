@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2019 - 2021 MWSOFT
+  Copyright (C) 2019 - 2022 MWSOFT
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -14,15 +14,13 @@
 package service
 
 import (
-	"fmt"
-
 	"github.com/superhero-match/superhero-offline-messages/cmd/api/model"
 	"github.com/superhero-match/superhero-offline-messages/cmd/api/service/mapper"
 )
 
-// GetCachedSuggestion fetches suggestion from cache and maps it into result.
-func (srv *Service) GetMessages(superheroID string) ([]model.Message, error) {
-	messages, err := srv.Cache.GetMessages(fmt.Sprintf(srv.Cache.MessagesKeyFormat, superheroID))
+// GetMessages fetches messages from cache and maps it into result.
+func (srv *service) GetMessages(key string) ([]model.Message, error) {
+	messages, err := srv.Cache.GetMessages(key)
 	if err != nil {
 		return nil, err
 	}
